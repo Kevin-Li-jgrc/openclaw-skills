@@ -9,6 +9,9 @@ Reusable OpenClaw skills from my local agent setup.
 - `skills/mistral-pdf-ocr`
   - EN: Run Mistral OCR on scanned PDFs and generate Markdown, JSON, and searchable PDFs with preserved page images.
   - 中文：使用 Mistral OCR 识别扫描版 PDF，并生成 Markdown、JSON，以及保留原页面图像的可搜索 PDF。
+- `skills/vgage-technical-agreement-extractor`
+  - EN: Extract VGAGE technical agreements into a configured Notion analysis database, with routing safeguards for requirement records versus project-progress pages.
+  - 中文：将 VGAGE 技术协议抽取为需求分析记录，并通过路由规则区分“项目需求分析库”和“项目进度页”。
 
 ## Repository Structure / 仓库结构
 
@@ -17,6 +20,8 @@ skills/
   mistral-pdf-ocr/
     SKILL.md
     scripts/
+  vgage-technical-agreement-extractor/
+    SKILL.md
 ```
 
 Each skill lives in its own folder under `skills/`.
