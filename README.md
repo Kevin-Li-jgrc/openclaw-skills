@@ -18,6 +18,9 @@ Reusable OpenClaw skills from my local agent setup.
 - `skills/vgage-measurement-probe-binding-check`
   - EN: Check and fill VGAGE Measurement-to-Probe bindings after creating, migrating, or modifying inspection items.
   - 中文：创建、迁移或修改 VGAGE 检测项后，检查并补齐 Measurement 与 Probe 的选择绑定。
+- `skills/vgage-probe-dependencies-check`
+  - EN: Check and fill VGAGE computed Probe Dependencies after creating, migrating, or modifying Probe formulas.
+  - 中文：创建、迁移或修改 VGAGE 计算 Probe 后，检查并补齐 Probe 的 Dependencies 依赖勾选。
 
 ## Repository Structure / 仓库结构
 
@@ -31,6 +34,8 @@ skills/
   vgage-project-progress/
     SKILL.md
   vgage-measurement-probe-binding-check/
+    SKILL.md
+  vgage-probe-dependencies-check/
     SKILL.md
 ```
 
