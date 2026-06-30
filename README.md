@@ -12,6 +12,9 @@ Reusable OpenClaw skills from my local agent setup.
 - `skills/vgage-technical-agreement-extractor`
   - EN: Extract VGAGE technical agreements into a configured Notion analysis database, with routing safeguards for requirement records versus project-progress pages.
   - 中文：将 VGAGE 技术协议抽取为需求分析记录，并通过路由规则区分“项目需求分析库”和“项目进度页”。
+- `skills/vgage-project-progress`
+  - EN: Update VGAGE weekly project progress from PPT files, manage focused projects, and link progress reminders with ECM-style folder monitoring.
+  - 中文：从项目例会 PPT 更新 VGAGE 项目进度，管理关注项目，并联动 ECM 类文件夹监控提醒。
 
 ## Repository Structure / 仓库结构
 
@@ -21,6 +24,8 @@ skills/
     SKILL.md
     scripts/
   vgage-technical-agreement-extractor/
+    SKILL.md
+  vgage-project-progress/
     SKILL.md
 ```
 
