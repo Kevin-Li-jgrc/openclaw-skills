@@ -21,6 +21,9 @@ Reusable OpenClaw skills from my local agent setup.
 - `skills/vgage-probe-dependencies-check`
   - EN: Check and fill VGAGE computed Probe Dependencies after creating, migrating, or modifying Probe formulas.
   - 中文：创建、迁移或修改 VGAGE 计算 Probe 后，检查并补齐 Probe 的 Dependencies 依赖勾选。
+- `skills/vgage-programming-taskbook-generator`
+  - EN: Convert VGAGE requirement evidence into a structured programming taskbook with implementation mapping, task splits, confirmation items, and validation checklists.
+  - 中文：将 VGAGE 需求证据转换为结构化编程任务书，包含实现映射、任务拆分、确认项和验收清单。
 
 ## Repository Structure / 仓库结构
 
@@ -37,6 +40,9 @@ skills/
     SKILL.md
   vgage-probe-dependencies-check/
     SKILL.md
+  vgage-programming-taskbook-generator/
+    SKILL.md
+    references/
 ```
 
 Each skill lives in its own folder under `skills/`.
