@@ -15,6 +15,9 @@ Reusable OpenClaw skills from my local agent setup.
 - `skills/vgage-project-progress`
   - EN: Update VGAGE weekly project progress from PPT files, manage focused projects, and link progress reminders with ECM-style folder monitoring.
   - 中文：从项目例会 PPT 更新 VGAGE 项目进度，管理关注项目，并联动 ECM 类文件夹监控提醒。
+- `skills/vgage-measurement-probe-binding-check`
+  - EN: Check and fill VGAGE Measurement-to-Probe bindings after creating, migrating, or modifying inspection items.
+  - 中文：创建、迁移或修改 VGAGE 检测项后，检查并补齐 Measurement 与 Probe 的选择绑定。
 
 ## Repository Structure / 仓库结构
 
@@ -26,6 +29,8 @@ skills/
   vgage-technical-agreement-extractor/
     SKILL.md
   vgage-project-progress/
+    SKILL.md
+  vgage-measurement-probe-binding-check/
     SKILL.md
 ```
 
