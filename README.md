@@ -6,6 +6,9 @@ Reusable OpenClaw skills from my local agent setup.
 
 ## Skills / 技能列表
 
+- `skills/bom-cost-align`
+  - EN: Align raw BOM spreadsheets with procurement cost sheets and generate formatted BOM cost workbooks with unit prices, totals, and component summaries.
+  - 中文：将原始 BOM 与采购成本表自动对齐，生成含单价、价格和组件汇总的格式化 BOM 成本核算 Excel。
 - `skills/mistral-pdf-ocr`
   - EN: Run Mistral OCR on scanned PDFs and generate Markdown, JSON, searchable PDFs, manifest files, and page-level OCR quality reports.
   - 中文：使用 Mistral OCR 识别扫描版 PDF，并生成 Markdown、JSON、可搜索 PDF、manifest 和逐页 OCR 质量报告。
@@ -29,6 +32,9 @@ Reusable OpenClaw skills from my local agent setup.
 
 ```text
 skills/
+  bom-cost-align/
+    SKILL.md
+    scripts/
   mistral-pdf-ocr/
     SKILL.md
     scripts/
