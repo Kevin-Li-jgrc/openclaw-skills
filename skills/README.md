@@ -4,7 +4,7 @@ Each subdirectory contains one reusable OpenClaw skill.
 
 ## Available Skills
 
-- `bom-cost-align`: Align raw BOM spreadsheets with procurement cost sheets and generate formatted BOM cost workbooks with unit prices, totals, and component summaries.
+- `bom-cost-align`: Align raw BOM spreadsheets with procurement cost sheets and generate formatted BOM cost workbooks with unit prices, mechanical component summaries, and electrical section summaries.
 - `mistral-pdf-ocr`: Run Mistral OCR on scanned PDFs and generate Markdown, JSON, searchable PDFs, manifests, and OCR quality reports.
 - `vgage-technical-agreement-extractor`: Extract VGAGE technical agreements into a configured Notion analysis database with project-progress routing safeguards.
 - `vgage-project-progress`: Update VGAGE weekly project progress from PPT files, manage focused projects, and link progress reminders with ECM-style folder monitoring.
