@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-BOM 成本对齐脚本 v1.2
-输入: 原始BOM(22列) + 采购成本表 → 输出: 手工版格式的成本核算Excel
+BOM 成本对齐脚本 v1.4
+输入: 原始BOM(22列, 机械/电气至少一张) + 采购成本表 → 输出: 手工版格式的成本核算Excel
 
 用法:
   python3 bom-cost-align.py <项目号> [选项]
@@ -44,17 +44,117 @@ def is_elec_section_row(row_data):
         return None
     return title
 
+def sheet_or_none(wb, name):
+    return wb[name] if name in wb.sheetnames else None
+
 # ── 采购加载 ──
+def norm_header(v):
+    return re.sub(r'\s+', '', str(v or '').strip())
+
+def to_float(v, default=0):
+    if v is None or v == '':
+        return default
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return default
+
+def detect_header(ws, required_any, max_scan=20):
+    for ridx, row in enumerate(ws.iter_rows(min_row=1, max_row=min(max_scan, ws.max_row), values_only=True), start=1):
+        headers = [norm_header(v) for v in row]
+        if any(any(key in h for h in headers) for key in required_any):
+            return ridx, headers
+    return None, []
+
+def idx_first(headers, *candidates):
+    for cand in candidates:
+        for i, h in enumerate(headers):
+            if cand in h:
+                return i
+    return None
+
+def load_standard_cost_sheet(ws):
+    hr, headers = detect_header(ws, ['图号/零件号', '零件编号', '件号'])
+    if not hr:
+        return {}
+    pn_i = idx_first(headers, '图号/零件号', '零件编号', '件号')
+    amount_i = idx_first(headers, '含税金额')
+    if pn_i is None or amount_i is None:
+        return {}
+    cm = {}
+    for r in ws.iter_rows(min_row=hr + 1, values_only=True):
+        pn = str(r[pn_i] or '').strip() if pn_i < len(r) else ''
+        if not pn or pn.startswith('图号') or is_comp(pn):
+            continue
+        cm[pn] = to_float(r[amount_i] if amount_i < len(r) else 0)
+    return cm
+
+def load_costed_bom_sheet(ws):
+    hr, headers = detect_header(ws, ['零件编号', '件号'])
+    if not hr:
+        return {}
+    pn_i = idx_first(headers, '零件编号', '件号')
+    total_i = idx_first(headers, '总价')
+    total_qty_i = idx_first(headers, '总数')
+    qty_i = idx_first(headers, '数量')
+    rate_i = idx_first(headers, '汇率')
+    unit_i = idx_first(headers, '物料含税单价', '含税单价')
+    process_i = idx_first(headers, '加工费用总价')
+    if pn_i is None:
+        return {}
+    cm = {}
+    for r in ws.iter_rows(min_row=hr + 1, values_only=True):
+        pn = str(r[pn_i] or '').strip() if pn_i < len(r) else ''
+        if not pn or pn.startswith('件号') or pn.startswith('零件编号') or is_comp(pn):
+            continue
+        amount = 0
+        if total_i is not None and total_i < len(r):
+            amount = to_float(r[total_i])
+        if amount <= 0 and unit_i is not None:
+            qty_src = total_qty_i if total_qty_i is not None else qty_i
+            qty = to_float(r[qty_src] if qty_src is not None and qty_src < len(r) else 0)
+            rate = to_float(r[rate_i] if rate_i is not None and rate_i < len(r) else 1, 1)
+            unit = to_float(r[unit_i] if unit_i < len(r) else 0)
+            process = to_float(r[process_i] if process_i is not None and process_i < len(r) else 0)
+            amount = qty * rate * unit + process
+        cm.setdefault(pn, []).append(amount)
+    return cm
+
 def load_cost(path):
     wb = openpyxl.load_workbook(path, data_only=True)
     cm = {}
-    for r in wb['明细'].iter_rows(min_row=4, values_only=True):
-        pn = str(r[0] or '').strip()
-        if pn:
-            try: cm[pn] = float(r[8]) if r[8] else 0
-            except: pass
+    sources = []
+    for s in wb.sheetnames:
+        ws = wb[s]
+        part_map = load_standard_cost_sheet(ws)
+        if not part_map:
+            part_map = load_costed_bom_sheet(ws)
+        if part_map:
+            for pn, amount in part_map.items():
+                if isinstance(amount, list):
+                    existing = cm.get(pn)
+                    if isinstance(existing, list):
+                        existing.extend(amount)
+                    elif existing is None:
+                        cm[pn] = amount
+                    else:
+                        cm[pn] = [existing] + amount
+                else:
+                    cm[pn] = amount
+            sources.append(f'{s}:{len(part_map)}')
     wb.close()
+    if not cm:
+        raise SystemExit(f'❌ 采购成本表缺少可识别的零件级价格明细: {path}')
+    print(f'   采购来源: {", ".join(sources)}')
     return cm
+
+def lookup_cost(cost_map, pn):
+    amounts = cost_map.get(pn)
+    if not amounts:
+        return 0
+    if isinstance(amounts, list):
+        return amounts.pop(0) if amounts else 0
+    return amounts
 
 # ── BOM 解析 (统一22列布局) ──
 # 机械: [0]件号 [1]名称 [2]类别 [3]规格 [4]物料代码 [5]说明 [6]数量 [7]品牌 ...
@@ -87,7 +187,7 @@ def parse_mech(ws, cost_map):
             continue
         if qty <= 0: continue
 
-        ct = cost_map.get(pn, 0)
+        ct = lookup_cost(cost_map, pn)
         up = ct / qty if qty > 0 and ct > 0 else 0
         rows.append(('part', {
             'pn':pn,'name':name,'spec':spec,'desc':desc,
@@ -118,7 +218,7 @@ def parse_elec(ws, cost_map):
         except (ValueError, TypeError):
             continue
         if qty <= 0: continue
-        ct = cost_map.get(pn, 0)
+        ct = lookup_cost(cost_map, pn)
         up = ct / qty if qty > 0 and ct > 0 else 0
         rows.append(('part', {
             'pn':pn,'name':name,'spec':spec,'desc':desc,
@@ -135,6 +235,19 @@ def calc_subtotals(rows):
         elif rt == 'part' and cur:
             ct[cur] = ct.get(cur, 0) + d['total']
     return ct
+
+def stats(rows):
+    parts = sum(1 for rt,_ in rows if rt == 'part')
+    matched = sum(1 for rt,d in rows if rt == 'part' and d['total'] > 0)
+    total = sum(d['total'] for rt,d in rows if rt == 'part')
+    return parts, matched, total
+
+def fmt_stats(label, rows):
+    if rows is None:
+        return f'{label}: SKIP'
+    parts, matched, total = stats(rows)
+    pct = matched / parts * 100 if parts else 0
+    return f'{label}: {parts}p/{matched}m ({pct:.0f}%) ¥{total:,.2f}'
 
 # ── 写入 ──
 def write_sheet(ws_out, data, comp_total):
@@ -172,11 +285,20 @@ def write_sheet(ws_out, data, comp_total):
 
 def find_files(d, proj):
     bf = cf = None
+    bom_candidates, cost_candidates = [], []
     for f in os.listdir(d):
         fp = os.path.join(d, f)
         if not os.path.isfile(fp): continue
-        if not bf and f == f'{proj}.xlsx': bf = fp
-        elif not cf and proj in f and ('采购成本' in f or '成本核算' in f) and f.endswith('.xlsx'): cf = fp
+        if not f.endswith('.xlsx') or f.startswith('~$') or proj not in f:
+            continue
+        if f == f'{proj}.xlsx':
+            bom_candidates.insert(0, fp)
+        elif 'BOM' in f.upper():
+            bom_candidates.append(fp)
+        elif any(k in f for k in ('采购成本', '成本核算', '成本')):
+            cost_candidates.append(fp)
+    bf = bom_candidates[0] if bom_candidates else None
+    cf = cost_candidates[0] if cost_candidates else None
     return bf, cf
 
 def main():
@@ -198,32 +320,36 @@ def main():
     print(f'   采购项: {len(cost)}')
 
     wb = openpyxl.load_workbook(bp, data_only=True)
-    mech = parse_mech(wb['机械BOM表'], cost)
-    elec = parse_elec(wb['电气BOM表'], cost)
+    mech_ws = sheet_or_none(wb, '机械BOM表')
+    elec_ws = sheet_or_none(wb, '电气BOM表')
+    if mech_ws is None and elec_ws is None:
+        available = ', '.join(wb.sheetnames)
+        wb.close()
+        print(f'❌ 原始BOM缺少 机械BOM表 / 电气BOM表；当前sheet: {available}')
+        sys.exit(1)
+    mech = parse_mech(mech_ws, cost) if mech_ws is not None else None
+    elec = parse_elec(elec_ws, cost) if elec_ws is not None else None
     wb.close()
 
-    mtot = calc_subtotals(mech)
-    etot = calc_subtotals(elec)
+    mtot = calc_subtotals(mech) if mech is not None else {}
+    etot = calc_subtotals(elec) if elec is not None else {}
+    mt = stats(mech)[2] if mech is not None else 0
+    et = stats(elec)[2] if elec is not None else 0
+    es = sum(1 for rt,_ in elec if rt=='sec') if elec is not None else 0
 
-    mp = sum(1 for rt,_ in mech if rt=='part')
-    ep = sum(1 for rt,_ in elec if rt=='part')
-    mm = sum(1 for rt,d in mech if rt=='part' and d['total']>0)
-    em = sum(1 for rt,d in elec if rt=='part' and d['total']>0)
-    mt = sum(d['total'] for rt,d in mech if rt=='part')
-    et = sum(d['total'] for rt,d in elec if rt=='part')
-    es = sum(1 for rt,_ in elec if rt=='sec')
-
-    print(f'   机械: {mp}p/{mm}m ({mm/mp*100 if mp else 0:.0f}%) ¥{mt:,.2f}  '
-          f'电气: {ep}p/{em}m ({em/ep*100 if ep else 0:.0f}%) ¥{et:,.2f}  '
-          f'电气栏目: {es}  合计: ¥{mt+et:,.2f}')
+    print(f'   {fmt_stats("机械", mech)}  '
+          f'{fmt_stats("电气", elec)}  '
+          f'电气栏目: {es if elec is not None else "SKIP"}  合计: ¥{mt+et:,.2f}')
 
     if a.dry_run: print('🔍 --dry-run'); return
 
     os.makedirs(os.path.join(odir, a.project), exist_ok=True)
     op = os.path.join(odir, a.project, f'{a.project}_BOM成本核算_自动生成.xlsx')
     wb2 = openpyxl.Workbook(); wb2.remove(wb2.active)
-    write_sheet(wb2.create_sheet('机械BOM'), mech, mtot)
-    write_sheet(wb2.create_sheet('电气BOM'), elec, etot)
+    if mech is not None:
+        write_sheet(wb2.create_sheet('机械BOM'), mech, mtot)
+    if elec is not None:
+        write_sheet(wb2.create_sheet('电气BOM'), elec, etot)
     wb2.save(op)
     print(f'✅ {op}')
 
