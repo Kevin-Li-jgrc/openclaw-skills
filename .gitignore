@@ -17,5 +17,10 @@ temp/
 tmp/
 ocr-outputs/
 **/ocr-outputs/
+
+# Office temp files
+~$*.xlsx
+~$*.docx
+~$*.pptx
 **/*_searchable_with_images.pdf
 **/*_ocr.json
