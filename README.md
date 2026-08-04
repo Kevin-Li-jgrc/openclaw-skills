@@ -30,6 +30,12 @@ Reusable OpenClaw skills from my local agent setup.
 - `skills/vgage-programming-taskbook-generator`
   - EN: Convert VGAGE requirement evidence into a structured programming taskbook with implementation mapping, task splits, confirmation items, and validation checklists.
   - 中文：将 VGAGE 需求证据转换为结构化编程任务书，包含实现映射、任务拆分、确认项和验收清单。
+- `skills/vgage-program-reviewer`
+  - EN: Review VGAGE Pro programs against company standards, supporting offline-gauge exemptions, multi-connection identification, custom variables, and zero-return checks.
+  - 中文：按公司标准审查 VGAGE Pro 项目，支持离线检具豁免、多连接标识、自定义变量和零返回判定。
+- `skills/vgage-pro-tag-manager`
+  - EN: Unify VGAGE User Tag text values, remarks, defaults, and safe migration across a program.
+  - 中文：统一 VGAGE User Tag 的有效 Text、备注、默认值与安全迁移。
 
 ## Repository Structure / 仓库结构
 
@@ -55,6 +61,15 @@ skills/
     scripts/
     examples/
   vgage-programming-taskbook-generator/
+    SKILL.md
+    references/
+  vgage-program-reviewer/
+    SKILL.md
+    examples/
+    references/
+    scripts/
+    templates/
+  vgage-pro-tag-manager/
     SKILL.md
     references/
 ```
