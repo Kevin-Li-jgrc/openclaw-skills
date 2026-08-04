@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IO>
+  <IMBus1 Type="IMBus" Name="IMBus1" Text="测量总线">
+    <IMBModule1 Type="IMB_im2" Name="IMBModule1">
+      <Value Text="0" Enabled="True" VgaTag="(none)" Description="夹紧到位" />
+      <Value Text="1 [p2]" Enabled="True" VgaTag="(none)" Description="2号传感器" />
+    </IMBModule1>
+  </IMBus1>
+</IO>

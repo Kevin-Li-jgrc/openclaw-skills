@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VGAGE Program Review Result",
+  "type": "object",
+  "required": [
+    "execution_state",
+    "overall_status",
+    "project",
+    "rule_package",
+    "rules",
+    "errors"
+  ],
+  "properties": {
+    "execution_state": {"enum": ["COMPLETE", "INCOMPLETE"]},
+    "overall_status": {
+      "type": ["string", "null"],
+      "enum": [
+        "BLOCKED",
+        "RECTIFICATION_REQUIRED",
+        "STATIC_PASSED_MANUAL_PENDING",
+        "STATIC_REVIEW_PASSED",
+        null
+      ]
+    },
+    "project": {"type": "object"},
+    "rule_package": {"type": "object"},
+    "rules": {"type": "array"},
+    "errors": {"type": "array"}
+  }
+}

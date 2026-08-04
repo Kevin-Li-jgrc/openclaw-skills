@@ -1,0 +1,35 @@
+{
+  "package": "vgage-program-reviewer",
+  "catalog_version": "2.14.0",
+  "effective_date": "2026-07-21",
+  "sources": [
+    {
+      "name": "VGAGE Pro V26.06",
+      "kind": "company-standard",
+      "sha256": "6d8ee89f55a6189ec10e1c03e2933ea31cf48dc11e121538862f72b655ee0a68",
+      "items": 28
+    },
+    {
+      "name": "电气调试 V24.1",
+      "kind": "company-standard",
+      "sha256": "bed4c7bf9d67b19a17ca4610178036733bc18bd84e2acc7c525938676ddbd0d9",
+      "items": 19
+    },
+    {
+      "name": "vgage-measurement-probe-binding-check",
+      "kind": "applied-skill-snapshot",
+      "sha256": "49e82348491800b8df56bba206bf7c03e15e043ba135d23628d7f1b7090fb1b2"
+    },
+    {
+      "name": "vgage-probe-dependencies-check",
+      "kind": "applied-skill-snapshot",
+      "sha256": "4ad3f5da39ad38c5fb2b8ede3a4068f99e8a407d53cf9d830d70235b39c1976f"
+    },
+    {
+      "name": "vgage-shared/core",
+      "kind": "confirmed-rule-snapshot",
+      "sha256": "f6206b2f66bebbd8c07096717ce7550c85d048dd2900b99d8ea1343cb8e58f5d"
+    }
+  ],
+  "scope_profile": "program-static-only"
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VGA Text="9975" SerialNumber="9975" SalesOrder="9975" Customer="客户" EndUser="终端客户" CreatedBy="Kevin" Encoding="GB2312">
+  <Probes>
+    <p1 Id="1" Name="p1" Text="1号传感器" Equation="Return 0" Digits="3" Symbol="Distance" SaveDynamicData="True" NumberOfCyclesToSave="51">
+      <Dependencies />
+    </p1>
+    <p1n2 Id="3" Name="p1n2" Text="直径" Equation="Return p1.Value + p2.Value" Digits="4" Symbol="Diameter">
+      <Dependencies><Id>1</Id><Id>2</Id></Dependencies>
+    </p1n2>
+  </Probes>
+  <Parts>
+    <Part Id="10" Name="Part1" Text="工件" Description="工件A">
+      <Measurements>
+        <M1 Id="101" Name="M1" Text="直径#1" Equation="Return 0" Symbol="Diameter" Operation="" EvaluateWhenSelected="True" ReadyToGage="1">
+          <Probes><Id>3</Id></Probes>
+          <Dependencies />
+        </M1>
+      </Measurements>
+    </Part>
+  </Parts>
+  <Tags><Tag Id="201" Name="ClampReady" Description="夹紧到位" /></Tags>
+  <MasterSets>
+    <MasterSet Id="301" Name="MasterSet1" Description="" />
+  </MasterSets>
+  <Features><Circle Id="401" Name="Feature1" Text="基准A" /></Features>
+  <AutoArchive NetworkFolder="C:\Production Data" />
+</VGA>

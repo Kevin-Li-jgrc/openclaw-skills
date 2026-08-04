@@ -1,0 +1,3 @@
+﻿Private Sub VGA_Initialize() Handles VGA.Initialize
+    ' 初始化
+End Sub

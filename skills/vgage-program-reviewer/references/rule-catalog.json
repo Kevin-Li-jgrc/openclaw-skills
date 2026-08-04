@@ -1,0 +1,1236 @@
+{
+  "catalog_version": "2.14.0",
+  "effective_date": "2026-07-21",
+  "rules": [
+    {
+      "rule_id": "VG-PRJ-001",
+      "title": "输入必须是可读取的完整 VGAGE Pro 项目目录；识别关键文件与项目结构",
+      "sources": [
+        {
+          "reference": "shared/core"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "PRJ"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：输入必须是可读取的完整 VGAGE Pro 项目目录；识别关键文件与项目结构",
+      "fail_condition": "存在可定位证据确认违反：输入必须是可读取的完整 VGAGE Pro 项目目录；识别关键文件与项目结构",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-STR-001",
+      "title": "VGA/XML/config/Screen/Form 等可解析，关键文件无损坏",
+      "sources": [
+        {
+          "reference": "shared/core"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "STR"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：VGA/XML/config/Screen/Form 等可解析，关键文件无损坏",
+      "fail_condition": "存在可定位证据确认违反：VGA/XML/config/Screen/Form 等可解析，关键文件无损坏",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-STR-002",
+      "title": "`VGA.Text/SerialNumber/SalesOrder/Customer/EndUser/GageType/ShipDate/CreatedBy` 等基础信息完整",
+      "sources": [
+        {
+          "standard": "V26.06",
+          "item": 4
+        }
+      ],
+      "severity": "P2",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "STR"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：`VGA.Text/SerialNumber/SalesOrder/Customer/EndUser/GageType/ShipDate/CreatedBy` 等基础信息完整",
+      "fail_condition": "存在可定位证据确认违反：`VGA.Text/SerialNumber/SalesOrder/Customer/EndUser/GageType/ShipDate/CreatedBy` 等基础信息完整",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-STR-004",
+      "title": "启用的数值 Measurement 必须具有可执行 Equation；已配置的 USL/LSL 必须成对、为有限数值且上下限顺序有效",
+      "sources": [
+        {
+          "standard": "V26.06",
+          "item": 6
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "STR"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "所有启用的数值 Measurement 均具有可执行 Equation；已配置的 USL/LSL 成对、可解析为有限数值且 USL 不小于 LSL",
+      "fail_condition": "至少一个启用的数值 Measurement 缺少 Equation，或 USL/LSL 不成对、不可解析、不是有限数值或 USL 小于 LSL",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-STR-005",
+      "title": "启用的 Probe 必须具有有效 Id、Name、Type 和可执行 Equation",
+      "sources": [
+        {
+          "standard": "V26.06",
+          "item": 7
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "STR"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "所有启用的 Probe 均具有有效 Id、Name、Type 和可执行 Equation",
+      "fail_condition": "至少一个启用的 Probe 缺少有效 Id、Name、Type 或可执行 Equation",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-STR-011",
+      "title": "Screen/Form 中的 Part、Measurement、Nest、Machine、Fixture 对象映射必须指向项目内已存在对象",
+      "sources": [
+        {
+          "standard": "V26.06",
+          "item": 10
+        }
+      ],
+      "severity": "P2",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "STR"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "项目文件证据表明 Screen/Form 的 Part、Measurement、Nest、Machine、Fixture 对象映射均可解析且指向已存在对象",
+      "fail_condition": "存在可定位证据表明 Screen/Form 对象映射为空、悬空或指向不存在的 Part、Measurement、Nest、Machine、Fixture",
+      "manual_steps": [
+        "依据项目文件复核 Screen/Form 对象映射"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-STR-012",
+      "title": "Screens 声明的 Form 必须存在；Form 对象名称、事件目标和直接控件引用不得悬空或冲突",
+      "sources": [
+        {
+          "reference": "shared/core"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "STR"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "Screens 中声明的 Form 均存在；Form Object 名称合法且不重复，序列化 Name 一致，Handles 目标和可确定的直接控件属性引用均可解析",
+      "fail_condition": "存在缺失的 Screens Form 文件、非法或重复 Object 名称、序列化 Name 不一致、悬空 Handles 目标或悬空的直接控件属性引用",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-STR-013",
+      "title": "`CodeModule.vgs` 为 UTF-8 BOM、仅使用 CRLF、无 Module/Namespace 包装",
+      "sources": [
+        {
+          "reference": "shared/core"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "STR"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "CodeModule.vgs 可按 UTF-8 BOM 解码、仅使用 CRLF，且不存在 Module/Namespace 包装",
+      "fail_condition": "CodeModule.vgs 缺少 UTF-8 BOM、无法按 UTF-8 解码、包含非 CRLF 换行或存在 Module/Namespace 包装",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-STR-014",
+      "title": "逻辑放置在正确脚本面；Measurement/Probe 公式中不得承载周期控制动作",
+      "sources": [
+        {
+          "reference": "shared/core"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "STR"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：逻辑放置在正确脚本面；Measurement/Probe 公式中不得承载周期控制动作",
+      "fail_condition": "存在可定位证据确认违反：逻辑放置在正确脚本面；Measurement/Probe 公式中不得承载周期控制动作",
+      "manual_steps": [
+        "依据项目文件或随附项目资料复核：逻辑放置在正确脚本面；Measurement/Probe 公式中不得承载周期控制动作"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-STR-016",
+      "title": "Part Text 必须填写实际工件名称，并与项目证据一致",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P2",
+      "execution": "hybrid",
+      "scope": {
+        "domain": "STR"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：Part Text 必须填写实际工件名称，并与项目证据一致",
+      "fail_condition": "存在可定位证据确认违反：Part Text 必须填写实际工件名称，并与项目证据一致",
+      "manual_steps": [
+        "依据项目文件或随附项目资料复核：Part Text 必须填写实际工件名称，并与项目证据一致"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-BIND-001",
+      "title": "顶层 Probe Name/Id 唯一并可建立稳定映射",
+      "sources": [
+        {
+          "skill": "vgage-measurement-probe-binding-check"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "BIND"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：顶层 Probe Name/Id 唯一并可建立稳定映射",
+      "fail_condition": "存在可定位证据确认违反：顶层 Probe Name/Id 唯一并可建立稳定映射",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-BIND-002",
+      "title": "Measurement 公式引用的 Probe 必须存在；正确声明的局部或 Public 自定义变量允许使用",
+      "sources": [
+        {
+          "skill": "vgage-measurement-probe-binding-check"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "BIND"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "Measurement 公式中的 Value/Average 对象可解析为现有 Probe 或其他已定义项目对象、当前公式内声明的局部变量，或 CodeModule/Probes 公共代码中声明的 Public 变量",
+      "fail_condition": "Measurement 公式中的 Value/Average 对象既不是现有 Probe/项目对象，也没有在当前公式或项目公共代码的有效作用域中正确声明",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-BIND-003",
+      "title": "Measurement `<Probes><Id>` 引用的 Probe Id 必须存在",
+      "sources": [
+        {
+          "skill": "vgage-measurement-probe-binding-check"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "BIND"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：Measurement `<Probes><Id>` 引用的 Probe Id 必须存在",
+      "fail_condition": "存在可定位证据确认违反：Measurement `<Probes><Id>` 引用的 Probe Id 必须存在",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-BIND-004",
+      "title": "Measurement 公式实际读取的 Probe 与 `<Probes><Id>` 完整一致",
+      "sources": [
+        {
+          "skill": "vgage-measurement-probe-binding-check"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "BIND"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：Measurement 公式实际读取的 Probe 与 `<Probes><Id>` 完整一致",
+      "fail_condition": "存在可定位证据确认违反：Measurement 公式实际读取的 Probe 与 `<Probes><Id>` 完整一致",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-BIND-006",
+      "title": "多 Probe、间接函数、动态对象名或无法唯一解析的 Measurement 绑定必须列为人工确认",
+      "sources": [
+        {
+          "skill": "vgage-measurement-probe-binding-check"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "BIND"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "所有 Measurement 绑定均可由直接单一 Probe 引用唯一解析",
+      "fail_condition": "静态发现多 Probe 或动态/间接对象查找，无法唯一确认绑定意图",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-DEP-001",
+      "title": "Probe Equation 引用的项目对象、VB 系统对象及 Probes 公共函数必须可解析",
+      "sources": [
+        {
+          "skill": "vgage-probe-dependencies-check"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "DEP"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "Probe Equation 中的对象引用均能解析到 Probe、IO、Tag、Feature、Measurement、允许的 VB 系统对象或 Probes Code 中声明的公共函数；存在的 IMBus 模块地址可直接引用",
+      "fail_condition": "Probe Equation 存在无法解析的项目对象引用；不得把 CInt 等包装函数或 Probes Code 中已声明的辅助函数误判为缺失对象",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-DEP-002",
+      "title": "直接读取 DP/IO/Tag/硬件通道的 Probe，其 Dependencies 应为空",
+      "sources": [
+        {
+          "skill": "vgage-probe-dependencies-check"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "DEP"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：直接读取 DP/IO/Tag/硬件通道的 Probe，其 Dependencies 应为空",
+      "fail_condition": "存在可定位证据确认违反：直接读取 DP/IO/Tag/硬件通道的 Probe，其 Dependencies 应为空",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-DEP-003",
+      "title": "计算 Probe 的 Dependencies 必须完整包含公式引用的全部 Probe Id",
+      "sources": [
+        {
+          "skill": "vgage-probe-dependencies-check"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "DEP"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：计算 Probe 的 Dependencies 必须完整包含公式引用的全部 Probe Id",
+      "fail_condition": "存在可定位证据确认违反：计算 Probe 的 Dependencies 必须完整包含公式引用的全部 Probe Id",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-DEP-004",
+      "title": "Probe Dependencies 不得包含公式未引用的多余 Id，并按公式出现顺序去重",
+      "sources": [
+        {
+          "skill": "vgage-probe-dependencies-check"
+        }
+      ],
+      "severity": "P2",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "DEP"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：Probe Dependencies 不得包含公式未引用的多余 Id，并按公式出现顺序去重",
+      "fail_condition": "存在可定位证据确认违反：Probe Dependencies 不得包含公式未引用的多余 Id，并按公式出现顺序去重",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-DEP-005",
+      "title": "Probe 不得自依赖或形成确定性循环依赖",
+      "sources": [
+        {
+          "reference": "归一化规则"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "DEP"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：Probe 不得自依赖或形成确定性循环依赖",
+      "fail_condition": "存在可定位证据确认违反：Probe 不得自依赖或形成确定性循环依赖",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-DEP-006",
+      "title": "Measurement 公式引用其他 Measurement 时，Dependencies 必须完整一致",
+      "sources": [
+        {
+          "reference": "measurement rules"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "DEP"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：Measurement 公式引用其他 Measurement 时，Dependencies 必须完整一致",
+      "fail_condition": "存在可定位证据确认违反：Measurement 公式引用其他 Measurement 时，Dependencies 必须完整一致",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-DEP-007",
+      "title": "在线检具的纯汇总/展示型最终 Measurement 应使用 RTG0；离线检具允许不使用 RTG0",
+      "sources": [
+        {
+          "reference": "measurement rules"
+        }
+      ],
+      "severity": "P1",
+      "execution": "hybrid",
+      "scope": {
+        "domain": "DEP"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "VGA.xml 根节点 GageType=Offline，或非离线检具的纯汇总/展示型最终 Measurement 使用 RTG0",
+      "fail_condition": "GageType=Inline、缺失或未知时，至少一个引用其他 Measurement 的纯汇总/展示型最终 Measurement 未使用 RTG0",
+      "manual_steps": [
+        "先核对 VGA.xml 根节点 GageType；仅 Offline 使用离线豁免，Inline、缺失或未知值继续检查 RTG0"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-001",
+      "title": "Nominal、USL、LSL 保存在 Measurement 属性中，公式中不应无证据硬编码名义值",
+      "sources": [
+        {
+          "reference": "measurement rules"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：Nominal、USL、LSL 保存在 Measurement 属性中，公式中不应无证据硬编码名义值",
+      "fail_condition": "存在可定位证据确认违反：Nominal、USL、LSL 保存在 Measurement 属性中，公式中不应无证据硬编码名义值",
+      "manual_steps": [
+        "依据项目文件或随附项目资料复核：Nominal、USL、LSL 保存在 Measurement 属性中，公式中不应无证据硬编码名义值"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-002",
+      "title": "对射探头/气动测头直径公式不得错误减去 `Me.Nominal`；其他场景按实际值/偏差语义判断",
+      "sources": [
+        {
+          "reference": "measurement rules"
+        }
+      ],
+      "severity": "P1",
+      "execution": "hybrid",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：对射探头/气动测头直径公式不得错误减去 `Me.Nominal`；其他场景按实际值/偏差语义判断",
+      "fail_condition": "存在可定位证据确认违反：对射探头/气动测头直径公式不得错误减去 `Me.Nominal`；其他场景按实际值/偏差语义判断",
+      "manual_steps": [
+        "依据项目文件或随附项目资料复核：对射探头/气动测头直径公式不得错误减去 `Me.Nominal`；其他场景按实际值/偏差语义判断"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-003",
+      "title": "`pXcY` 中心偏移 Probe 的 Symbol 必须为 CenterPoint；`pXnY` 不按名称预设语义",
+      "sources": [
+        {
+          "reference": "measurement rules"
+        }
+      ],
+      "severity": "P2",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "未发现 pXcY Probe，或所有 pXcY Probe 的 Symbol 均为 CenterPoint；pXnY 交由实际 Measurement 用途判定",
+      "fail_condition": "存在 pXcY Probe 的 Symbol 不是 CenterPoint",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-005",
+      "title": "持久化 Feature 类型必须属于已确认 FeatureType 集合；Vector 不得误作 BaseFeature",
+      "sources": [
+        {
+          "reference": "measurement rules"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：持久化 Feature 类型必须属于已确认 FeatureType 集合；Vector 不得误作 BaseFeature",
+      "fail_condition": "存在可定位证据确认违反：持久化 Feature 类型必须属于已确认 FeatureType 集合；Vector 不得误作 BaseFeature",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-006",
+      "title": "BestFit 使用正确的 `Offset` 属性，不得出现伪 API `Offect`",
+      "sources": [
+        {
+          "reference": "measurement rules"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：BestFit 使用正确的 `Offset` 属性，不得出现伪 API `Offect`",
+      "fail_condition": "存在可定位证据确认违反：BestFit 使用正确的 `Offset` 属性，不得出现伪 API `Offect`",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-007",
+      "title": "使用数值字面量进行 BestFit 硬编码拟合时，修改点、Offset 或 Correlation 后读取结果前必须执行 `Recalc()`",
+      "sources": [
+        {
+          "reference": "measurement rules"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "未发现硬编码拟合，或硬编码修改 BestFit 后在读取结果前执行了 `Recalc()`",
+      "fail_condition": "存在数值字面量硬编码拟合，且修改 BestFit 后未执行 `Recalc()` 或在执行前读取结果",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-008",
+      "title": "Feature 名称应为合法、全局唯一的脚本标识符，避免与其他注入全局对象冲突",
+      "sources": [
+        {
+          "reference": "measurement rules"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：Feature 名称应为合法、全局唯一的脚本标识符，避免与其他注入全局对象冲突",
+      "fail_condition": "存在可定位证据确认违反：Feature 名称应为合法、全局唯一的脚本标识符，避免与其他注入全局对象冲突",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-010",
+      "title": "`SetupFeatureProbeGeometry()` 应从 `VGA.Initialize` 调用，且不混入 AddPoint/ClearPoints/Recalc",
+      "sources": [
+        {
+          "reference": "script surface rules"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：`SetupFeatureProbeGeometry()` 应从 `VGA.Initialize` 调用，且不混入 AddPoint/ClearPoints/Recalc",
+      "fail_condition": "存在可定位证据确认违反：`SetupFeatureProbeGeometry()` 应从 `VGA.Initialize` 调用，且不混入 AddPoint/ClearPoints/Recalc",
+      "manual_steps": [
+        "依据项目文件或随附项目资料复核：`SetupFeatureProbeGeometry()` 应从 `VGA.Initialize` 调用，且不混入 AddPoint/ClearPoints/Recalc"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-011",
+      "title": "仅当 `SaveDynamicData=True` 时检查 `NumberOfCyclesToSave`；值必须有效且≤50，False 时忽略周期数",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：仅当 `SaveDynamicData=True` 时检查 `NumberOfCyclesToSave`；值必须有效且≤50，False 时忽略周期数",
+      "fail_condition": "存在可定位证据确认违反：仅当 `SaveDynamicData=True` 时检查 `NumberOfCyclesToSave`；值必须有效且≤50，False 时忽略周期数",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-012",
+      "title": "尺寸测量相关 Probe 的 Digits 必须为 4；非尺寸 Probe 不强制，语义不明时人工确认",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P2",
+      "execution": "hybrid",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：尺寸测量相关 Probe 的 Digits 必须为 4；非尺寸 Probe 不强制，语义不明时人工确认",
+      "fail_condition": "存在可定位证据确认违反：尺寸测量相关 Probe 的 Digits 必须为 4；非尺寸 Probe 不强制，语义不明时人工确认",
+      "manual_steps": [
+        "依据项目文件或随附项目资料复核：尺寸测量相关 Probe 的 Digits 必须为 4；非尺寸 Probe 不强制，语义不明时人工确认"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-013",
+      "title": "非动态采样及普通 Probe 不得以确定性公式直接 `Return 0`；动态 IMBus 模块地址 Probe 允许使用",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "父级 IMBus 的 DynamicBeingUsed=True 时允许 Probe 使用模块地址；其他启用 Probe 的整个函数不得确定性直接返回 0，条件分支中的 Return 0 不视为占位",
+      "fail_condition": "父级 IMBus 的 DynamicBeingUsed=False 或属性缺失，或普通 Probe，且整个启用 Probe 函数确定性直接返回 0；批准占位对象除外",
+      "manual_steps": [],
+      "allowed_exceptions": [
+        "仅接受有项目依据、审批记录或 Kevin 明确确认的例外"
+      ]
+    },
+    {
+      "rule_id": "VG-MEAS-014",
+      "title": "公式 Probe 的 Symbol 必须与实际使用它的 Measurement 检测语义一致；原始硬件 Probe 不按空 Symbol 误报",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "未发现语义可识别的公式 Probe，或公式 Probe Symbol 与引用它的 Measurement Name/Text 检测语义一致；pXcY 为 CenterPoint",
+      "fail_condition": "公式 Probe Symbol 与实际 Measurement 检测语义不一致，或同一公式 Probe 被互相冲突的检测语义使用，或 pXcY 不是 CenterPoint",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-015",
+      "title": "存在 Angle Probe 时，相关 Probe 的 Encoder 关联必须与对应 Angle Probe 一致",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：存在 Angle Probe 时，相关 Probe 的 Encoder 关联必须与对应 Angle Probe 一致",
+      "fail_condition": "存在可定位证据确认违反：存在 Angle Probe 时，相关 Probe 的 Encoder 关联必须与对应 Angle Probe 一致",
+      "manual_steps": [
+        "依据项目文件或随附项目资料复核：存在 Angle Probe 时，相关 Probe 的 Encoder 关联必须与对应 Angle Probe 一致"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-016",
+      "title": "MasterSet Text 必须填写实际校准件类型，如 Max/Min Mastering",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P2",
+      "execution": "hybrid",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "所有 MasterSet 的 Text 均已填写实际校准件类型，如 Max/Min Mastering",
+      "fail_condition": "至少一个 MasterSet 的 Text 缺失或为空",
+      "manual_steps": [
+        "依据项目文件或随附项目资料复核：MasterSet Text 必须填写实际校准件类型，如 Max/Min Mastering"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-017",
+      "title": "存在温度类 Probe 且校准需要记录环境温度时，对应温度 Probe 必须加入 MasterSet",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P1",
+      "execution": "hybrid",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：存在温度类 Probe 且校准需要记录环境温度时，对应温度 Probe 必须加入 MasterSet",
+      "fail_condition": "存在可定位证据确认违反：存在温度类 Probe 且校准需要记录环境温度时，对应温度 Probe 必须加入 MasterSet",
+      "manual_steps": [
+        "依据项目文件或随附项目资料复核：存在温度类 Probe 且校准需要记录环境温度时，对应温度 Probe 必须加入 MasterSet"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-018",
+      "title": "可直接表示检测项目的 Probe，其 MasterSet CertPoint 应填写测点图检测项目编号",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P2",
+      "execution": "hybrid",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：可直接表示检测项目的 Probe，其 MasterSet CertPoint 应填写测点图检测项目编号",
+      "fail_condition": "存在可定位证据确认违反：可直接表示检测项目的 Probe，其 MasterSet CertPoint 应填写测点图检测项目编号",
+      "manual_steps": [
+        "依据项目文件或随附项目资料复核：可直接表示检测项目的 Probe，其 MasterSet CertPoint 应填写测点图检测项目编号"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-019",
+      "title": "MasterSet Probe 的 NominalSize 必须与直接绑定 Measurement 的 Nominal 一致；原始单点 Probe 的 0/0 校准值除外",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P1",
+      "execution": "hybrid",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "可唯一解析 Measurement Nominal 的 MasterSet Probe，其 NominalSize 与 Measurement Nominal 一致；无可用 Nominal 的对象不判错；原始单点 Probe 的 NominalSize=0 且 ActualSize=0 时豁免",
+      "fail_condition": "至少一个 MasterSet Probe 可唯一解析 Measurement Nominal，但 NominalSize 缺失、无效或与该 Nominal 不一致",
+      "manual_steps": [
+        "同一 Probe 直接绑定多个不同 Measurement Nominal 时，核对测量项目映射并确认唯一正确名义值"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-020",
+      "title": "Feature 名称必须修改为实际基准/特征名称，并与项目证据一致",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P2",
+      "execution": "hybrid",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：Feature 名称必须修改为实际基准/特征名称，并与项目证据一致",
+      "fail_condition": "存在可定位证据确认违反：Feature 名称必须修改为实际基准/特征名称，并与项目证据一致",
+      "manual_steps": [
+        "依据项目文件或随附项目资料复核：Feature 名称必须修改为实际基准/特征名称，并与项目证据一致"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-021",
+      "title": "Double Measurement 任意分支不得 `Return 0`；Integer Measurement 不得确定性直接 `Return 0`",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "启用的 Double Measurement 公式不存在 Return 0；启用的 Integer Measurement 不是整个函数确定性直接 Return 0；其他类型不适用本数值规则",
+      "fail_condition": "启用的 Double Measurement 任意条件分支出现 Return 0，或启用的 Integer Measurement 整个函数确定性直接 Return 0",
+      "manual_steps": [],
+      "allowed_exceptions": [
+        "仅接受有项目依据、审批记录或 Kevin 明确确认的例外"
+      ]
+    },
+    {
+      "rule_id": "VG-MEAS-022",
+      "title": "在线检具的非日期时间 Measurement 的 EvaluateWhenSelected 必须为 False；离线检具允许为 True",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P1",
+      "execution": "hybrid",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "VGA.xml 根节点 GageType=Offline；或 DateTime/Date/Time 类型；或非离线检具的其他启用 Measurement 显式配置 EvaluateWhenSelected=False；或 True 已有批准例外和功能证据",
+      "fail_condition": "GageType=Inline、缺失或未知时，至少一个非 DateTime/Date/Time 的启用 Measurement 的 EvaluateWhenSelected 为 True，或属性缺省并按 VGAGE 默认值解析为 True，且无批准例外",
+      "manual_steps": [
+        "先核对 VGA.xml 根节点 GageType；仅 Offline 使用离线豁免，其他类型按现有日期时间和批准例外口径检查"
+      ],
+      "allowed_exceptions": [
+        "仅接受有项目依据、审批记录或 Kevin 明确确认的例外"
+      ]
+    },
+    {
+      "rule_id": "VG-MEAS-023",
+      "title": "Measurement Name/Text 的中英文检测含义必须与 Symbol 一致",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "未发现可识别语义，或 Measurement Name/Text 中可识别的中英文检测含义与 Symbol 一致",
+      "fail_condition": "Measurement Name/Text 中存在明确可识别的中英文检测含义，但 Symbol 为空或不一致",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-MEAS-024",
+      "title": "Measurement Operation/OP 必须已选择且不得为空",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "MEAS"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：Measurement Operation/OP 必须已选择且不得为空",
+      "fail_condition": "存在可定位证据确认违反：Measurement Operation/OP 必须已选择且不得为空",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-IO-002",
+      "title": "存在 IMBus 测量模块时，非 EMPTY 通道必须解析为 `0基通道号 [Probe名]` 并与项目 Probe 自洽",
+      "sources": [
+        {
+          "reference": "shared/core"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "IO"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "项目未使用 IMBus 测量模块，或所有非 EMPTY 通道的编号、容量和 Probe 映射均自洽",
+      "fail_condition": "IMBus 通道文本格式、0基索引、模块容量、Probe 存在性或唯一映射存在错误",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-IO-003",
+      "title": "存在 IMBus 映射时，物理 Probe Equation 必须与模块名和0基通道一致；组合 Probe 不直接占通道",
+      "sources": [
+        {
+          "reference": "shared/core"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "IO"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "项目未使用 IMBus 测量模块，或每个映射 Probe 的 Equation 与模块名和0基通道一致",
+      "fail_condition": "IMBus 映射 Probe 的 Equation 与模块/通道不一致，或组合 Probe 直接占用物理通道",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-IO-010",
+      "title": "PLC/WAGO 等硬件对接点必须有有效备注；检查“有备注无 VGA Tag”和“有 VGA Tag 无备注”；海外项目备注须为英文",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P1",
+      "execution": "hybrid",
+      "scope": {
+        "domain": "IO"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：PLC/WAGO 等硬件对接点必须有有效备注；检查“有备注无 VGA Tag”和“有 VGA Tag 无备注”；海外项目备注须为英文",
+      "fail_condition": "存在可定位证据确认违反：PLC/WAGO 等硬件对接点必须有有效备注；检查“有备注无 VGA Tag”和“有 VGA Tag 无备注”；海外项目备注须为英文",
+      "manual_steps": [
+        "依据项目文件或随附项目资料复核：PLC/WAGO 等硬件对接点必须有有效备注；检查“有备注无 VGA Tag”和“有 VGA Tag 无备注”；海外项目备注须为英文"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-IO-011",
+      "title": "IMBus 的 Text 必须包含 USB、有效 IP 地址或 COM 编号，通道 Text 必须填写传感器编号",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P1",
+      "execution": "hybrid",
+      "scope": {
+        "domain": "IO"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "IMBus 总线 Text 包含 USB、有效 IP 地址或 COM 编号中的任一连接标识，且通道 Text 按既有格式填写传感器编号",
+      "fail_condition": "IMBus 总线 Text 未包含 USB、有效 IP 地址或 COM 编号，或通道 Text 未按既有格式填写传感器编号",
+      "manual_steps": [
+        "依据 IO.xml 复核 IMBus 总线 Text 的 USB/IP/COM 连接标识及通道 Text 的传感器编号"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-IO-012",
+      "title": "Orbit 模块传感器名称必须与其对应 Probe 编号一致",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "IO"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：Orbit 模块传感器名称必须与其对应 Probe 编号一致",
+      "fail_condition": "存在可定位证据确认违反：Orbit 模块传感器名称必须与其对应 Probe 编号一致",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-IO-013",
+      "title": "Tag.Name 必须具有明确实际意义；国内项目 Tag.Description 必须填写中文备注，海外项目不强制 Description",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P2",
+      "execution": "hybrid",
+      "scope": {
+        "domain": "IO"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：Tag.Name 必须具有明确实际意义；国内项目 Tag.Description 必须填写中文备注，海外项目不强制 Description",
+      "fail_condition": "存在可定位证据确认违反：Tag.Name 必须具有明确实际意义；国内项目 Tag.Description 必须填写中文备注，海外项目不强制 Description",
+      "manual_steps": [
+        "依据项目文件或随附项目资料复核：Tag.Name 必须具有明确实际意义；国内项目 Tag.Description 必须填写中文备注，海外项目不强制 Description"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-SAFE-011",
+      "title": "`AfterUpdate/AfterEvaluate/Form Refresh` 等周期面无慢 IO、递归动作、重复注册或无界增长",
+      "sources": [
+        {
+          "reference": "shared/core"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "SAFE"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：`AfterUpdate/AfterEvaluate/Form Refresh` 等周期面无慢 IO、递归动作、重复注册或无界增长",
+      "fail_condition": "存在可定位证据确认违反：`AfterUpdate/AfterEvaluate/Form Refresh` 等周期面无慢 IO、递归动作、重复注册或无界增长",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-SAFE-013",
+      "title": "校准到期日不得在启动或初始化时被无条件向后重置",
+      "sources": [
+        {
+          "reference": "真实项目风险"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "SAFE"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "启动/初始化过程未发现无条件把校准到期日设置为当前时间加周期的调用链",
+      "fail_condition": "启动/初始化过程存在无条件把校准到期日设置为当前时间加周期的调用链",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-DATA-005",
+      "title": "MES/数据库/Web API 写入具备失败处理、重试/缓存和完成标志，避免部分写入",
+      "sources": [
+        {
+          "reference": "shared/core"
+        },
+        {
+          "reference": "真实项目风险"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "DATA"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：MES/数据库/Web API 写入具备失败处理、重试/缓存和完成标志，避免部分写入",
+      "fail_condition": "存在可定位证据确认违反：MES/数据库/Web API 写入具备失败处理、重试/缓存和完成标志，避免部分写入",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-DATA-007",
+      "title": "存在打标相关代码时必须具有防重码功能，且防重结果不得被硬编码放行",
+      "sources": [
+        {
+          "reference": "真实项目风险"
+        }
+      ],
+      "severity": "P1",
+      "execution": "deterministic",
+      "scope": {
+        "domain": "DATA"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "未发现打标代码，或打标代码存在可定位的防重码检查且未被硬编码放行",
+      "fail_condition": "存在打标代码但未发现防重码检查，或防重结果被无条件硬编码放行",
+      "manual_steps": [],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-DATA-011",
+      "title": "温补按协议启用或保留能力；采集原始数据与算法参数可追溯",
+      "sources": [
+        {
+          "standard": "V26.06",
+          "item": 27
+        }
+      ],
+      "severity": "P1",
+      "execution": "hybrid",
+      "scope": {
+        "domain": "DATA"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：温补按协议启用或保留能力；采集原始数据与算法参数可追溯",
+      "fail_condition": "存在可定位证据确认违反：温补按协议启用或保留能力；采集原始数据与算法参数可追溯",
+      "manual_steps": [
+        "依据项目文件或随附项目资料复核：温补按协议启用或保留能力；采集原始数据与算法参数可追溯"
+      ],
+      "allowed_exceptions": []
+    },
+    {
+      "rule_id": "VG-DATA-012",
+      "title": "Auto-Archive Network folder 不得为空且不得位于 C 盘；允许其他本地盘、UNC 或映射网络路径，目录存在性人工确认",
+      "sources": [
+        {
+          "reference": "Kevin 追加规则"
+        }
+      ],
+      "severity": "P1",
+      "execution": "hybrid",
+      "scope": {
+        "domain": "DATA"
+      },
+      "required_evidence": [
+        "项目文件或与本规则直接相关的项目证据"
+      ],
+      "pass_condition": "存在可定位证据确认满足：Auto-Archive Network folder 不得为空且不得位于 C 盘；允许其他本地盘、UNC 或映射网络路径，目录存在性人工确认",
+      "fail_condition": "存在可定位证据确认违反：Auto-Archive Network folder 不得为空且不得位于 C 盘；允许其他本地盘、UNC 或映射网络路径，目录存在性人工确认",
+      "manual_steps": [
+        "依据项目文件或随附项目资料复核：Auto-Archive Network folder 不得为空且不得位于 C 盘；允许其他本地盘、UNC 或映射网络路径，目录存在性人工确认"
+      ],
+      "allowed_exceptions": []
+    }
+  ]
+}
