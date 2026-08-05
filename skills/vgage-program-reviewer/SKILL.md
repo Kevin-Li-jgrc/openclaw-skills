@@ -5,7 +5,7 @@ description: "审查 VGAGE 项目，支持离线检具豁免、多连接标识�
 
 # VGAGE Program Reviewer
 
-当前规则目录版本：`2.15.0`。
+当前规则目录版本：`2.16.0`。
 
 检查完整 VGAGE Pro 项目目录中的项目文件、程序逻辑和程序侧接口配置。运行前读取 `references/boundary-contract.md`、`references/rule-catalog.json` 和 `references/source-manifest.json`。
 

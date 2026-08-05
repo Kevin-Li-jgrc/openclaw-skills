@@ -28,10 +28,10 @@ def main() -> int:
     catalog = json.loads((PACKAGE_ROOT / "references" / "rule-catalog.json").read_text(encoding="utf-8"))
     rules = catalog["rules"]
     ids = {item["rule_id"] for item in rules}
-    assert len(rules) == len(ids) == 56
-    assert catalog["catalog_version"] == "2.15.0"
+    assert len(rules) == len(ids) == 57
+    assert catalog["catalog_version"] == "2.16.0"
     print("package: PASS")
-    print("catalog: PASS (56 rules)")
+    print("catalog: PASS (57 rules)")
     print("scope: PASS (program-static-only)")
 
     fixture_count = 0

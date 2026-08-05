@@ -51,6 +51,7 @@ from rules_measurement import (
     check_measurement_operation,
     check_measurement_return_zero,
     check_probe_return_zero,
+    check_string_datetime_not_empty,
 )
 from rules_code import (
     check_bestfit_hardcoded_recalc,
@@ -132,6 +133,7 @@ CONTEXT_RULES = {
     "VG-MEAS-022": check_evaluate_when_selected,
     "VG-MEAS-023": check_measurement_name_symbol,
     "VG-MEAS-024": check_measurement_operation,
+    "VG-MEAS-025": check_string_datetime_not_empty,
     "VG-DATA-012": check_auto_archive_path,
     "VG-DATA-005": check_external_write_resilience,
     "VG-DATA-007": check_marking_anti_duplicate,

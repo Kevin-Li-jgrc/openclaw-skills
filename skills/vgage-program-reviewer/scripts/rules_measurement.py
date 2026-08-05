@@ -194,6 +194,30 @@ def check_evaluate_when_selected(facts: dict[str, Any], rule: dict[str, Any], co
     return result(rule, "PASS", evidence if evidence else [])
 
 
+def check_string_datetime_not_empty(facts: dict[str, Any], rule: dict[str, Any], context: dict[str, Any]) -> dict[str, Any]:
+    del context
+    not_empty_types = {"string", "datetime", "date", "time"}
+    evidence = []
+    for measurement in facts.get("measurements", []):
+        if not active(measurement):
+            continue
+        if str(measurement.get("type") or "").strip().casefold() not in not_empty_types:
+            continue
+        missing = []
+        if not str(measurement.get("equation") or "").strip():
+            missing.append("Equation")
+        if not str(measurement.get("text") or "").strip():
+            missing.append("Text")
+        if missing:
+            evidence.append({
+                "file": "VGA.xml",
+                "object": measurement.get("name"),
+                "measurement_type": measurement.get("type"),
+                "missing_fields": missing,
+            })
+    return result(rule, "FAIL" if evidence else "PASS", evidence)
+
+
 def check_measurement_operation(facts: dict[str, Any], rule: dict[str, Any], context: dict[str, Any]) -> dict[str, Any]:
     del context
     operation_exempt_types = {"datetime", "date", "time", "string", "text", "boolean"}
