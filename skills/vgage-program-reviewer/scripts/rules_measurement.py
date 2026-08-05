@@ -171,7 +171,7 @@ def check_evaluate_when_selected(facts: dict[str, Any], rule: dict[str, Any], co
             }],
         )
     evidence = []
-    evaluate_exempt_types = {"datetime", "date", "time"}
+    evaluate_exempt_types = {"datetime", "date", "time", "string"}
     for measurement in facts.get("measurements", []):
         if not active(measurement):
             continue

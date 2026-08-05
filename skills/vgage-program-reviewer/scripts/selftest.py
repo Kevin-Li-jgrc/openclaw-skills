@@ -29,7 +29,7 @@ def main() -> int:
     rules = catalog["rules"]
     ids = {item["rule_id"] for item in rules}
     assert len(rules) == len(ids) == 56
-    assert catalog["catalog_version"] == "2.14.0"
+    assert catalog["catalog_version"] == "2.15.0"
     print("package: PASS")
     print("catalog: PASS (56 rules)")
     print("scope: PASS (program-static-only)")

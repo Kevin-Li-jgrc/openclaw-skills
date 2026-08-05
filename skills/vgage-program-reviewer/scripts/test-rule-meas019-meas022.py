@@ -63,7 +63,7 @@ def master_facts(probe: dict, measurements: list[dict], mastered: list[dict]) ->
 
 
 def test_meas_022() -> None:
-    for measurement_type, value in (("DateTime", None), ("Date", True), ("Time", True)):
+    for measurement_type, value in (("DateTime", None), ("Date", True), ("Time", True), ("String", None), ("String", True)):
         exempt = check_evaluate_when_selected(
             {
                 "measurements": [
